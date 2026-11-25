@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Elétrico vs Combustão — Cetelem Auto Novo</title>
+<meta name="color-scheme" content="only light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Ubuntu:wght@400;500;700&display=swap">
+<style>
+/*
+  PLANO DE DESIGN
+  Cor: --brand-deep #154734 (fundo de marca), --brand #337F37 (ação/accent principal),
+       --paper #F4F4F4 (fundo de página), --ink #202620 (texto), --sand #FFF9EC (realce de
+       "ganho" neutro-quente para não competir com o verde de ação).
+       Verde = ação/elétrico; grafite --ice #5B636C = combustão (preciso manter distinção
+       semântica, não decorativa).
+  Tipo: Open Sans no texto e Ubuntu nos títulos, botões e valores em destaque, como em cetelem.pt
+       (900 no hero/números-chave, 800 em títulos, 700 em rótulos, 400 no corpo).
+  Layout: página de aterragem com barra fixa fina, hero com proposta de valor + 3 passos
+       numerados reais (há de facto uma sequência: indicar → simular → poupar), depois o
+       simulador existente tratado como o "produto" central, secção de pressupostos em duas
+       colunas (crédito | utilização) e rodapé de confiança/legal.
+  Princípio: nada de hero genérico com gradiente; o hero mostra os dois carros como protagonistas
+       da comparação. Os "01/02/03" são justificados porque о conteúdo é mesmo um processo.
+*/
+:root{
+  --paper:#EBF5F0; --surface:#FFFFFF; --ink:#45463F; --muted:#696969; --line:#D3E3D6; --head:#154734;
+  --brand:#337F37; --brand-deep:#154734; --brand-soft:#DCEBDC; --on-brand:#FFFFFF;
+  --ev:#337F37; --ev-soft:#DCEBDC;
+  --ice:#545C64; --ice-soft:#EEF0F2;
+  --good:#337F37; --good-soft:rgba(51,127,55,.14); --warn:#9C5B00; --warn-soft:rgba(156,91,0,.12);
+  --sand:#FBF4E3; --sand-line:#EADFC2;
+  --shadow:0 2px 14px rgba(20,40,20,.08),0 1px 2px rgba(20,40,20,.06);
+  --f:"Open Sans",Arial,system-ui,sans-serif; --fh:Ubuntu,"Open Sans",Arial,sans-serif;
+  --gx:max(20px,env(safe-area-inset-left,0px)); --gy:max(20px,env(safe-area-inset-right,0px));
+}
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.55;font-variant-numeric:tabular-nums;-webkit-text-size-adjust:100%}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:clamp(1.3rem,2.6vw,1.7rem)}
+h3{font-size:1.05rem;font-weight:700}
+h1,h2,h3,h4,.btn,.navcta,.use,.more-btn,.seg button,.period button,.ctabs button,.txt-btn,.verdict .big,.pmt .v,.ten-sum .v,.e-save .big,.hero .stat .n{font-family:var(--fh)}
+h2,h3{color:var(--head)} .hero h2,.hero h3{color:var(--on-brand)}
+p{margin:0}
+a{color:inherit}
+.muted{color:var(--muted)}
+.ev{color:var(--ev)} .ice{color:var(--ice)} .good{color:var(--good)}
+.kicker{font-size:.84rem;color:var(--muted);font-weight:700}
+
+/* Barra fixa */
+.topbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb, var(--surface) 92%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .inner{max-width:1040px;margin:0 auto;padding:12px var(--gy);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;letter-spacing:-.01em;text-decoration:none}
+.brand .brandmark{height:34px;width:auto;flex:none}
+.brand .brandmascot{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--brand-soft)}
+footer .brandmark{height:28px}
+.brand .brandsub{font-size:.82rem;font-weight:700;color:var(--muted);padding-left:10px;border-left:1px solid var(--line)}
+.navlinks{display:flex;gap:4px;font-size:.88rem;font-weight:700}
+.navlinks a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--muted)}
+.navlinks a:hover{color:var(--ink);background:var(--brand-soft)}
+.navcta{display:inline-flex;align-items:center;gap:6px;background:var(--brand-deep);color:var(--on-brand);font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.navcta:hover{background:var(--brand)}
+@media (max-width:640px){ .navlinks{display:none} }
+
+/* Hero */
+.hero{background:var(--brand-deep);color:var(--on-brand);position:relative;overflow:clip}
+.hero .inner{max-width:1040px;margin:0 auto;padding:56px var(--gy) 104px var(--gx);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;align-items:center}
+.hero .copy{display:flex;flex-direction:column;gap:16px;animation:rise .5s ease-out both}
+.hero .kicker{color:rgba(255,255,255,.75)}
+.hero h1{font-size:clamp(2rem,4.3vw,3rem);line-height:1.1}
+.hero h1 .h1-sub{display:block;font-size:.62em;font-weight:700;opacity:.84;margin-top:6px}
+.hero .product{color:rgba(255,255,255,.8);font-size:.95rem;font-weight:700}
+.hero .product .vs{font-weight:700;opacity:.75;padding:0 .2em}
+.hero p.lede{color:rgba(255,255,255,.86);max-width:50ch;font-size:1.02rem}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;padding:12px 20px;border-radius:999px;text-decoration:none;border:2px solid transparent}
+.btn.primary{background:#337F37;color:#fff}
+.btn.primary:hover{background:#3d9142}
+.btn.ghost{border-color:rgba(255,255,255,.45);color:var(--on-brand)}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
+.hero .stat{display:flex;flex-direction:column;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:22px 24px;position:relative;animation:rise .5s .1s ease-out both}
+.hero .stat .mascot-hero{position:absolute;top:-34px;right:18px;width:84px;height:84px;border-radius:50%;object-fit:cover;box-shadow:0 4px 14px rgba(0,0,0,.25);border:3px solid var(--brand-deep)}
+.hero .stat .n{font-size:clamp(1.9rem,4vw,2.5rem);font-weight:700;line-height:1}
+.hero .stat .kicker{padding-right:78px}
+.hero .stat .l{font-size:.82rem;color:rgba(255,255,255,.72);margin-top:8px}
+.hero .cars{display:flex;gap:10px;margin-top:16px}
+.hero .cars span{flex:1;text-align:center;font-size:.78rem;font-weight:700;padding:8px 6px;border-radius:12px}
+.hero .cars .ice{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.hero .cars .ev{background:rgba(255,255,255,.18);color:#fff}
+.tag{align-self:flex-start;font-size:.74rem;font-weight:700;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.14);color:rgba(255,255,255,.88)}
+@media (max-width:760px){ .hero .inner{grid-template-columns:1fr} }
+
+/* Passos (sequência real) */
+.steps{max-width:1040px;margin:-48px auto 0;padding:0 var(--gy);position:relative;z-index:5}
+.steps .row{background:var(--surface);border-radius:20px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.step{padding:22px 22px;display:flex;gap:14px;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+.step .no{flex:none;width:30px;height:30px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.step .tx h3{font-size:.95rem;margin-bottom:2px}
+.step .tx p{font-size:.82rem;color:var(--muted)}
+.step{transition:background-color .15s}
+.step:hover{background:var(--brand-soft)}
+@media (max-width:760px){ .steps .row{grid-template-columns:1fr} .step{border-right:0;border-bottom:1px solid var(--line)} .step:last-child{border-bottom:0} }
+
+.section{max-width:1040px;margin:0 auto;padding:64px var(--gy) 0}
+.section .head{display:flex;flex-direction:column;gap:6px;margin-bottom:22px;max-width:62ch}
+.section.tight{padding-top:40px}
+
+.wrap{max-width:1040px;margin:0 auto;padding:0 var(--gy) 72px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--surface);border-radius:18px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--line)}
+
+/* Dados: só valor, entrada e prazo */
+.inputs{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:end}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f label{font-size:.8rem;color:var(--muted);font-weight:700}
+.f input,.f select{font:inherit;font-weight:700;font-size:1rem;width:100%;padding:10px 14px;border:2px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.f select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--brand) 50%),linear-gradient(135deg,var(--brand) 50%,transparent 50%);background-position:calc(100% - 18px) 55%,calc(100% - 13px) 55%;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
+.f.price input{font-size:1.5rem;font-weight:700;padding:5px 40px 5px 16px;border-color:var(--brand);border-radius:16px}
+.price .wrapin{position:relative}
+.price .wrapin span{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--brand);font-size:1.15rem;font-weight:700}
+.f input:hover,.f select:hover{border-color:var(--brand)}
+input:focus-visible,select:focus-visible{outline:3px solid var(--good-soft);outline-offset:1px;border-color:var(--brand)}
+.rate{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:.84rem}
+.chip{display:inline-flex;gap:5px;align-items:baseline;padding:4px 11px;border-radius:999px;background:var(--brand-soft);font-weight:700;color:var(--muted)}
+.chip b{color:var(--ink);font-weight:700}
+.rate .same{color:var(--muted);font-weight:600}
+.warnmsg{grid-column:1 / -1;color:var(--warn);font-size:.84rem;font-weight:700}
+
+/* Veredicto */
+.verdict{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;background:var(--brand-soft);border-radius:18px;padding:18px 22px;border:2px solid var(--good-soft)}
+.verdict .big{font-size:clamp(1.8rem,4.4vw,2.4rem);font-weight:700;line-height:1;color:var(--good)}
+.verdict p{font-size:.9rem;max-width:48ch}
+.verdict.bad{background:var(--warn-soft);border-color:transparent} .verdict.bad .big{color:var(--warn)}
+
+/* Cartões mensais por carro */
+.mcars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.mcar{display:flex;flex-direction:column;gap:12px;min-width:0}
+.mcar h3{display:flex;align-items:center;gap:8px}
+.pmt{border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:1px}
+.mcar.ice .pmt{background:var(--ice-soft)} .mcar.ev .pmt{background:var(--brand-deep);color:#fff} .mcar.ev .pmt .v small,.mcar.ev .pmt .s{color:rgba(255,255,255,.82)}
+.pmt .v{font-size:1.9rem;font-weight:700;line-height:1.05}
+.pmt .v small{font-size:.82rem;font-weight:600;color:var(--muted)}
+.pmt .s{font-size:.78rem;color:var(--muted);font-weight:600}
+.mcar dl{font-size:.9rem}
+.mcar dd.t{font-size:1.05rem}
+.eyebrow{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:-.005em}
+
+/* Indicador: upgrade elétrico */
+.upg{border:2px solid var(--good-soft);border-radius:14px;background:var(--surface)}
+.upg summary{cursor:pointer;list-style:none;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;font-size:.9rem;font-weight:700}
+.upg summary::-webkit-details-marker{display:none}
+.upg .tip-ico{flex:none;width:28px;height:28px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--good-soft)}
+.upg.na .tip-ico{box-shadow:0 0 0 3px var(--ice-soft);filter:saturate(.6) opacity(.8)}
+.upg summary b{color:var(--good);font-weight:700;white-space:nowrap}
+.upg summary .more{margin-left:auto;color:var(--brand);font-size:1.2rem;line-height:1}
+.upg[open] summary .more{transform:rotate(45deg)}
+.upg .body{padding:0 12px 12px 34px;display:flex;flex-direction:column;gap:8px;font-size:.86rem}
+.upg .body dl{font-size:.86rem}
+.upg .body .fine{font-size:.76rem;color:var(--muted)}
+.upg.na summary b{color:var(--muted)}
+
+/* Tabela única */
+.monthly{display:flex;flex-direction:column;gap:12px}
+.monthly .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin:0}
+.monthly .head p{font-size:.8rem}
+.rotate{display:none;font-size:.82rem;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:12px;padding:8px 12px}
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px}
+.tbl table{border-collapse:collapse;width:100%;min-width:640px;font-size:.86rem}
+.tbl th,.tbl td{padding:8px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+.tbl tbody tr:last-child th,.tbl tbody tr:last-child td{border-bottom:0}
+.tbl thead th{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;background:var(--paper)}
+.tbl thead tr.grp th{font-size:.78rem;text-transform:none;letter-spacing:0;color:var(--ink);text-align:center;border-bottom:1px solid var(--line)}
+.tbl thead tr.grp th small{display:block;font-size:.7rem;color:var(--muted);font-weight:700}
+.tbl .g{border-left:2px solid var(--line)}
+.tbl th[scope=row]{text-align:left;font-weight:700;position:sticky;left:0;background:var(--surface);z-index:1}
+.tbl thead th:first-child{position:sticky;left:0;z-index:2}
+.tbl th[scope=row] small{display:block;font-size:.7rem;color:var(--muted);font-weight:600}
+.tbl td{font-weight:700}
+.tbl td.ice{color:var(--ink)}
+.d{display:inline-block;font-size:.8rem;font-weight:700;padding:1px 8px;border-radius:999px}
+.d.save{color:var(--good);background:var(--good-soft)}
+.d.more{color:var(--warn);background:var(--warn-soft)}
+.d.eq{color:var(--muted);background:var(--ice-soft)}
+.tbl tr.tot th,.tbl tr.tot td{background:var(--brand-soft);font-size:.95rem;font-weight:700}
+.tbl tr.tot .d{font-size:.88rem}
+
+/* Gráfico */
+.chart-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.legend{display:flex;gap:14px;font-size:.82rem;color:var(--muted);font-weight:600}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
+.dot.ev{background:var(--ev)} .dot.ice{background:var(--ice)}
+.chart-wrap{position:relative;width:100%;border-radius:10px}
+.chart-wrap:focus-visible{outline:3px solid var(--good-soft);outline-offset:3px}
+.chart-wrap svg{display:block;width:100%;overflow:visible}
+.chart-wrap text{font-family:var(--f);font-size:11.5px;font-weight:600;fill:var(--muted)}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border-radius:12px;padding:9px 12px;font-size:.82rem;box-shadow:0 8px 24px rgba(0,0,0,.16);min-width:170px;border:1px solid var(--line)}
+.tip .r{display:flex;justify-content:space-between;gap:12px;font-weight:700}
+
+/* Detalhe recolhido */
+details.card{padding:0}
+details.card summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+";color:var(--brand);font-size:1.3rem;line-height:1}
+details.card[open] summary::after{content:"−"}
+.cars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding:0 18px 18px}
+.car{display:flex;flex-direction:column;gap:10px;min-width:0}
+.car h3{display:flex;align-items:center;gap:8px;font-size:1rem}
+dl{margin:0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;font-size:.88rem}
+dt{color:var(--muted)}
+dd{margin:0;text-align:right;font-weight:700}
+dt.t,dd.t{color:var(--ink);font-weight:700}
+.rule{grid-column:1 / -1;height:1px;background:var(--line);margin:2px 0}
+.sub{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--brand);font-weight:700;grid-column:1 / -1;margin-top:4px}
+
+/* Pressupostos — duas colunas */
+.assump{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.assump .card h3{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.assump .card h3 .dot{width:9px;height:9px}
+.assump .card p{font-size:.86rem;color:var(--muted);line-height:1.65}
+.assump .card p strong{color:var(--ink)}
+@media (max-width:760px){ .assump{grid-template-columns:1fr} }
+
+.sources{font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px}
+.sources a{color:var(--good);font-weight:700;text-decoration:none}
+.sources a:hover{text-decoration:underline}
+
+.disclaimer{background:var(--sand);border:1px solid var(--sand-line);border-radius:16px;padding:18px 20px;font-size:.86rem;color:var(--ink);display:flex;gap:12px;align-items:flex-start}
+.disclaimer .ic{flex:none;width:22px;height:22px;border-radius:50%;background:var(--sand-line);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#7A5A12}
+
+footer{border-top:1px solid var(--line);margin-top:24px}
+footer .inner{max-width:1040px;margin:0 auto;padding:28px var(--gy) 40px;display:flex;flex-direction:column;gap:6px;font-size:.8rem;color:var(--muted)}
+footer .brand{font-size:.92rem;color:var(--ink);font-weight:700}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+
+@media (max-width:600px){
+  .inputs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .f.price{grid-column:1 / -1}
+  .mcars{grid-template-columns:minmax(0,1fr)}
+  .cars{grid-template-columns:minmax(0,1fr)}
+  .f input,.f select{padding:13px 14px;min-height:44px}
+  .f.price input{padding:11px 40px 11px 16px;min-height:48px}
+  .section{padding-top:48px}
+  .hero .inner{padding:40px var(--gy) 88px}
+}
+@media (orientation:portrait) and (max-width:700px){ .rotate{display:block} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.fine{font-size:.8rem;color:var(--muted)}
+.link{font-weight:700;color:var(--good)}
+/* ===== Adições da fusão (mesma linguagem visual) ===== */
+.perks{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.perks span{display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:.84rem;font-weight:700}
+.perks span::before{content:"✓";color:var(--brand);font-weight:700}
+.range{width:100%;accent-color:var(--brand);height:36px;margin:-2px 0;cursor:pointer}
+.scale{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);font-weight:700;margin-top:-6px}
+.sim-actions{grid-column:1 / -1;display:flex;justify-content:flex-end}
+.txt-btn{font:inherit;font-weight:700;font-size:.85rem;color:var(--good);background:none;border:0;cursor:pointer;text-decoration:underline;min-height:40px}
+.verdict .mv{display:flex;align-items:center;gap:12px}
+.verdict .mv img,.e-save .mv img{width:44px;height:44px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--good-soft);flex:none}
+.period{display:none;gap:8px}
+.period button{flex:1;font:inherit;font-weight:700;font-size:.88rem;min-height:42px;border-radius:999px;border:2px solid var(--brand-soft);background:var(--brand-soft);color:var(--head);cursor:pointer}
+.period button[aria-pressed="true"]{background:var(--brand-deep);border-color:var(--brand-deep);color:var(--on-brand)}
+.more-btn{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font:inherit;font-size:.74rem;font-weight:700;color:var(--good);background:var(--surface);border:2px solid var(--brand);border-radius:999px;padding:3px 12px;min-height:30px;cursor:pointer;white-space:nowrap}
+.more-btn:hover{background:var(--brand-soft)}
+.more-btn[aria-expanded="true"]{background:var(--brand-deep);color:var(--on-brand)}
+.tbl tr.xrow td{padding:0;text-align:left;white-space:normal;background:var(--paper)}
+.xpanel{padding:18px 20px;border-top:2px solid var(--brand);display:flex;flex-direction:column;gap:12px;min-width:0}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.calc h4{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:.95rem}
+.calc dl{font-size:.86rem}
+.xnote{font-size:.84rem;color:var(--muted)}
+.ten-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+.ten-sum > div{padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.ten-sum > div+div{border-left:1px solid var(--line)}
+.ten-sum .lbl{font-size:.78rem;font-weight:700;color:var(--muted)}
+.ten-sum .v{font-size:1.5rem;font-weight:700;line-height:1.1}
+.ten-sum .hl{background:var(--brand-soft)} .ten-sum .hl .v{color:var(--good)} .ten-sum .hl.bad{background:var(--ice-soft)} .ten-sum .hl.bad .v{color:var(--ink)}
+.mini{border-collapse:collapse;width:100%;font-size:.86rem;margin-bottom:16px}
+.mini th,.mini td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+.mini thead th{background:var(--paper);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.mini th:first-child,.mini td:first-child{text-align:left}
+.mini tbody th{font-weight:700;text-align:left}
+.mini tbody th small{display:block;font-size:.7rem;color:var(--muted);font-weight:600}
+.mini td{font-weight:700;white-space:nowrap}
+.mini tr.tot th,.mini tr.tot td{background:var(--brand-soft);font-weight:700}
+.tbl-scroll{overflow-x:auto}
+.tag2{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+.tag2.low{background:var(--brand);color:var(--on-brand)} .tag2.high{background:var(--ice-soft);color:var(--ink)} .tag2.mine{background:var(--surface);color:var(--good);border:1px solid var(--brand)}
+.energy{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:16px;align-items:start}
+.side{display:flex;flex-direction:column;gap:14px}
+.rng{display:flex;flex-direction:column;gap:2px}
+.rng .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:.86rem;font-weight:700}
+.rng .top output{font-weight:700;white-space:nowrap}
+.rng.off{opacity:.55}
+.fld .lab{display:block;font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:6px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:inherit;font-weight:700;font-size:.86rem;min-height:42px;padding:8px 15px;border-radius:999px;border:2px solid var(--brand-soft);background:var(--brand-soft);color:var(--head);cursor:pointer}
+.seg button:hover{border-color:var(--brand)}
+.seg button[aria-pressed="true"]{background:var(--brand-deep);border-color:var(--brand-deep);color:var(--on-brand)}
+.sw{display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;min-height:40px;cursor:pointer}
+.sw input{width:20px;height:20px;accent-color:var(--brand)}
+.hint{font-size:.82rem;color:var(--warn);font-weight:700}
+.e-save{background:var(--brand-soft);border:2px solid var(--good-soft);border-radius:18px;padding:16px 20px;display:flex;flex-direction:column;gap:4px}
+.e-save.bad{background:var(--warn-soft);border-color:transparent}
+.e-save .big{font-size:clamp(1.9rem,4.4vw,2.4rem);font-weight:700;line-height:1;color:var(--good)}
+.e-save.bad .big{color:var(--warn)}
+.e-save .mv{display:flex;align-items:center;gap:12px}
+.e-cost{display:flex;flex-direction:column;gap:2px}
+.e-cost .v{font-size:1.7rem;font-weight:700;line-height:1.15}.e-cost .v small{font-size:.82rem;color:var(--muted);font-weight:700}
+.e-cost .c{font-size:.82rem;color:var(--muted)}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ctabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:16px;flex-wrap:wrap}
+.ctabs button{font:inherit;font-weight:700;font-size:.9rem;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;min-height:48px;padding:8px 12px;cursor:pointer}
+.ctabs button[aria-selected="true"]{color:var(--head);border-bottom-color:var(--brand-deep)}
+.cpanel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:22px;align-items:start}
+.cpanel .v{font-size:2rem;font-weight:700;color:var(--good);line-height:1.1}.cpanel .v small{font-size:.88rem;color:var(--muted);font-weight:700}
+.cblock{margin-top:24px}
+.takeaway{margin-top:10px;font-weight:700;font-size:.92rem;display:flex;gap:10px;align-items:center}
+.takeaway img{width:30px;height:30px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--good-soft);flex:none}
+.use{font:inherit;font-size:.78rem;font-weight:700;color:var(--good);background:var(--surface);border:2px solid var(--brand);border-radius:999px;min-height:40px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.use[aria-pressed="true"]{background:var(--brand-deep);border-color:var(--brand-deep);color:var(--on-brand)}
+.refs td{white-space:normal;text-align:left;font-weight:400}
+.refs td.p{font-weight:700;white-space:nowrap}
+.nl{margin:0;display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);border-top:1px solid var(--line);margin-top:16px}
+.nl dt,.nl dd{padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.nl dt{font-weight:700;font-size:.9rem}
+.nl dd{font-size:.88rem;color:var(--muted)}
+.nl dd strong{color:var(--ink)}
+.src{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:1px;white-space:nowrap}
+.src.of{background:var(--brand);color:var(--on-brand)} .src.est{background:var(--ice-soft);color:var(--ink)} .src.miss{background:var(--warn-soft);color:var(--warn)}
+.prop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 18px 18px}
+.prop-grid > div{background:var(--paper);border-radius:14px;padding:14px 16px}
+.prop-grid h4{font-size:.95rem;margin-bottom:4px} .prop-grid p{font-size:.86rem;color:var(--muted)}
+@media (max-width:860px){ .energy{grid-template-columns:minmax(0,1fr)} .cpanel{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:700px){
+  .period{display:flex}
+  .tbl[data-period="p1"] .p2,.tbl[data-period="p2"] .p1{display:none}
+  .tbl table{min-width:0}
+  .rotate{display:none!important}
+  .calc-grid,.cols2,.prop-grid{grid-template-columns:minmax(0,1fr)}
+  .ten-sum{grid-template-columns:minmax(0,1fr)} .ten-sum > div+div{border-left:0;border-top:1px solid var(--line)}
+  .nl{grid-template-columns:minmax(0,1fr)} .nl dt{border-bottom:0;padding-bottom:0}
+}
+/* ===== Hero no estilo de cetelem.pt: fundo branco, título #154734, painel #337F37 com caixa #154734 */
+.hero{background:var(--surface);color:var(--ink)}
+.hero .inner{padding:44px var(--gy) 40px var(--gx)}
+.hero .copy,.hero .stat{animation:none}
+.hero .kicker{color:var(--muted)}
+.hero h1{color:var(--head);font-weight:700}
+.hero h1 .h1-sub{color:var(--brand);opacity:1;font-weight:700}
+.hero .product{color:var(--head)} .hero .product .vs{opacity:1;color:var(--brand)}
+.hero p.lede{color:var(--ink)}
+.btn.ghost{border-color:var(--brand-deep);color:var(--head)} .btn.ghost:hover{background:var(--brand-soft)}
+.btn.primary:hover{background:var(--brand-deep);filter:none}
+.tag{background:var(--brand-soft);color:var(--head)}
+.hero .stat{background:#337F37;border:0;border-radius:16px;padding:24px;color:#fff}
+.hero .stat .kicker{color:#fff;font-weight:700}
+.hero .stat .n{display:block;background:#154734;border-radius:12px;padding:18px 16px;margin-top:12px;text-align:center;color:#fff}
+.hero .stat .l{color:#fff;opacity:.92}
+.hero .stat .mascot-hero{border-color:#337F37;box-shadow:none}
+.hero .cars .ice{background:#DCEBDC;color:#154734} .hero .cars .ev{background:#154734;color:#fff}
+.steps{margin-top:0}
+:root{--shadow:none}
+.mcar.ev .pmt .v,.mcar.ev .pmt .v *{color:#fff} .mcar.ev .pmt .eyebrow{color:#fff}
+.cpanel[hidden],.tbl tr.xrow[hidden],[hidden]{display:none!important}
+/* ===== Acabamento sóbrio: menos cor saturada, sem símbolos, sem pílulas decorativas */
+:root{--good:#154734; --good-soft:rgba(21,71,52,.08); --ev:#154734}
+.d{border-radius:6px;padding:1px 6px;font-weight:700}
+.d.save{background:transparent;color:var(--head)} .d.more{background:transparent;color:var(--warn)} .d.eq{background:transparent}
+.perks{gap:0;margin-top:14px}
+.perks span{background:none;border:0;border-radius:0;padding:2px 16px 2px 0;margin-right:16px;border-right:1px solid var(--line);font-weight:600;font-size:.88rem;color:var(--ink)}
+.perks span:last-child{border-right:0}
+.perks span::before{content:none}
+.chip{background:var(--brand-soft);color:var(--ink);font-weight:600} .chip b{color:var(--head);font-weight:700}
+.hero h1 .h1-sub{color:var(--ink);font-weight:400}
+.hero .product .vs{color:var(--muted);font-weight:400}
+.tag{border-radius:6px;font-weight:600}
+.hero .stat .n{font-weight:700}
+.mcar.ev .pmt .v,.mcar.ev .pmt .v *{color:#fff}
+.verdict .big,.e-save .big{color:var(--head)}
+.step .no{background:none;border:1.5px solid var(--brand-deep);color:var(--head);font-weight:700}
+.tag2{border-radius:6px}
+.mini .tag2.mine{border-radius:6px}
+details.card summary::after,.upg summary .more{color:var(--head)}
+/* ===== Fundo branco e mais ar, como cetelem.pt */
+
+body{background:var(--surface);font-size:16px;line-height:1.6}
+.card,.steps .row,.ten-sum,.mcar .pmt{box-shadow:none}
+.card{border:1px solid #9AB8A3;border-radius:24px;padding:28px}
+.steps .row{border:1px solid #9AB8A3;border-radius:24px}
+.steps{margin-top:8px;padding-bottom:8px}
+.hero .inner{padding:72px var(--gy) 56px var(--gx);gap:56px}
+.section{padding-top:104px}
+.section.tight{padding-top:72px}
+.section .head{margin-bottom:32px;gap:10px}
+.wrap{gap:28px;padding-bottom:112px}
+.mcars{gap:28px}
+.tbl td,.tbl th{padding-top:14px;padding-bottom:14px}
+.verdict{padding:24px 28px;border-radius:24px}
+footer .inner{padding:48px var(--gy) 56px}
+footer{border-top:1px solid #DCEBDC}
+@media (max-width:640px){
+  .card{padding:20px;border-radius:20px}
+  .hero .inner{padding:44px var(--gy) 40px var(--gx)}
+  .section{padding-top:72px} .wrap{gap:20px;padding-bottom:80px}
+}
+/* ===== Faixas verde-claro alternadas e menu de três pontos */
+.band{background:#EBF5F0;padding:8px 0 0}
+.band .section.tight{padding-top:56px}
+.band .wrap:last-child,.band .section:last-child{padding-bottom:96px}
+.band .steps .row{background:#fff}
+footer{background:#F7F7F6;border-top:0}
+.topbar .inner{gap:10px}
+.topbar .inner>.navcta{margin-left:auto}
+.kebab{position:relative;flex:none}
+.kebab-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--brand-deep);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.5px;cursor:pointer;padding:0}
+.kebab-btn i{width:4px;height:4px;border-radius:50%;background:var(--brand-deep);display:block}
+.kebab-btn:hover,.kebab-btn[aria-expanded="true"]{background:var(--brand-soft)}
+.kebab-btn:focus-visible{outline:3px solid #337F37;outline-offset:2px}
+.kebab-list{position:absolute;right:0;top:calc(100% + 10px);min-width:220px;background:#fff;border:1px solid #9AB8A3;border-radius:16px;padding:8px;display:flex;flex-direction:column;z-index:60}
+.kebab-list[hidden]{display:none}
+.kebab-list a{font-family:var(--fh);font-weight:500;font-size:.95rem;color:var(--head);text-decoration:none;padding:11px 14px;border-radius:10px}
+.kebab-list a:hover,.kebab-list a:focus-visible{background:var(--brand-soft);outline:none}
+/* ===== Mais verde e mais vida, como cetelem.pt */
+.hero{background:#EBF5F0}
+.tag{background:#fff}
+.btn.ghost{background:#fff}
+h2{font-weight:400;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.2}
+h2 b{font-weight:700}
+.wrap{background:#DCEBDC;border-radius:32px;padding:32px;width:min(1040px,calc(100% - 40px));margin:0 auto 96px;max-width:none}
+.band .wrap:last-child{padding-bottom:32px}
+.band .section:last-child{padding-bottom:0}
+.band{padding-bottom:8px}
+.verdict{background:#154734;border:0;color:#fff}
+.verdict .big,.verdict p,.verdict .eyebrow,.verdict span{color:#fff}
+.verdict .mv img{box-shadow:0 0 0 3px #337F37}
+.verdict.bad{background:#45463F}
+.steps .row{background:transparent;border:0;gap:20px}
+.step{background:#fff;border:1px solid #9AB8A3 !important;border-radius:24px;transition:transform .2s,border-color .2s,background-color .2s}
+.step:hover{transform:translateY(-3px);border-color:#337F37 !important;background:#fff}
+.card{transition:border-color .2s,transform .2s}
+.card:hover{border-color:#337F37}
+.mcar .pmt{transition:transform .2s}
+.mcar:hover .pmt{transform:translateY(-2px)}
+.tbl tbody tr,.mini tbody tr{transition:background-color .15s}
+.tbl tbody tr:hover > *,.mini tbody tr:hover > *{background:#EBF5F0}
+.tbl tbody tr.tot:hover > *,.mini tbody tr.tot:hover > *{background:#DCEBDC}
+.btn,.navcta,.use,.more-btn,.seg button,.period button,.kebab-btn{transition:background-color .18s,color .18s,border-color .18s,transform .12s}
+.btn:active,.navcta:active,.use:active,.seg button:active{transform:scale(.97)}
+.seg button:hover{background:#cfe3cf;border-color:#cfe3cf}
+.chip{transition:transform .15s} .chip:hover{transform:translateY(-1px)}
+.float-save{position:fixed;right:20px;bottom:20px;z-index:50;display:flex;align-items:center;gap:10px;background:#154734;color:#fff;text-decoration:none;border-radius:999px;padding:8px 20px 8px 8px;border:2px solid #337F37;transition:transform .2s,background-color .2s}
+.float-save:hover{background:#337F37;transform:translateY(-2px)}
+.float-save img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.float-save span{display:flex;flex-direction:column;line-height:1.15}
+.float-save small{font-size:.7rem;opacity:.85}
+.float-save b{font-family:var(--fh);font-size:1.05rem;font-weight:700}
+.float-save[hidden]{display:none}
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none} .step:hover,.float-save:hover,.chip:hover,.mcar:hover .pmt{transform:none}}
+@media (max-width:640px){.wrap{padding:16px;border-radius:24px;margin-bottom:64px} .float-save{right:12px;left:12px;bottom:12px;justify-content:center}}
+.band .steps .row{background:transparent}
+.band{padding-bottom:56px}
+.band .wrap{margin-bottom:0}
+#simulador{margin-top:56px}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a class="brand" href="#top"><img class="brandmark" src="assets/cetelem-logo.svg" alt="Cetelem" width="108" height="34"><img class="brandmascot" src="assets/mascote-shh.jpg" alt="" width="38" height="38"><span class="brandsub">Auto Novo</span></a>
+  <a class="navcta" href="#simulador">Simular agora</a>
+  <div class="kebab">
+    <button type="button" class="kebab-btn" id="menuBtn" aria-label="Menu da página" aria-haspopup="true" aria-expanded="false" aria-controls="menuList"><i></i><i></i><i></i></button>
+    <nav class="kebab-list" id="menuList" aria-label="Secções da página" hidden>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#energia">Energia</a>
+      <a href="#carregamento">Carregamento</a>
+      <a href="#pressupostos">Pressupostos</a>
+    </nav>
+  </div>
+</div></div>
+
+<div id="top"></div>
+<div class="hero"><div class="inner">
+  <div class="copy">
+    <span class="kicker">Crédito Auto Novo Cetelem · Portugal · novembro 2026</span>
+    <h1>A pensar trocar de carro?<span class="h1-sub">Faça as contas antes de decidir.</span></h1>
+    <p class="product">Elétrico <span class="vs">vs</span> Combustão: o mesmo crédito para os dois carros</p>
+    <p class="lede">Indique o valor, a entrada e o prazo. A tabela mostra mês a mês onde o elétrico custa menos e onde custa mais.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#simulador">Simular agora</a>
+      <a class="btn ghost" href="#pressupostos">Ver pressupostos</a>
+    </div>
+    <span class="tag">Proposta de MVP · simulação sem valor contratual</span>
+  </div>
+  <div class="stat">
+    <img class="mascot-hero" src="assets/mascote-shh.jpg" alt="Mascote da Cetelem" width="84" height="84">
+    <span class="kicker" style="color:rgba(255,255,255,.72)">Poupança do elétrico em 10 anos</span>
+    <span class="n" id="heroBig">—</span>
+    <span class="l" id="heroSub">atualiza com os valores do simulador abaixo</span>
+    <div class="cars"><span class="ice">Combustão</span><span class="ev">Elétrico</span></div>
+  </div>
+</div></div>
+
+<div class="band">
+<div class="steps"><div class="row">
+  <div class="step"><span class="no">1</span><div class="tx"><h3>Indique o carro</h3><p>Valor, entrada e prazo do crédito Cetelem.</p></div></div>
+  <div class="step"><span class="no">2</span><div class="tx"><h3>Compare os custos</h3><p>Mensalidade, energia, manutenção, taxas e seguro, lado a lado.</p></div></div>
+  <div class="step"><span class="no">3</span><div class="tx"><h3>Veja a poupança</h3><p>Durante o crédito e nos 10 anos seguintes.</p></div></div>
+</div></div>
+
+<section class="section tight" id="como-funciona">
+  <div class="head">
+    <span class="kicker">Antes de simular</span>
+    <h2>As mesmas condições de <b>crédito para os dois carros</b></h2>
+    <p class="muted" style="font-size:.92rem">Os dois carros têm o mesmo valor de compra e o mesmo crédito. A diferença está no custo de os usar: energia, manutenção, seguro e taxas.</p>
+  </div>
+  <div class="perks" aria-label="Condições do crédito automóvel Cetelem">
+    <span>Taxa fixa</span><span>Sem comissão de abertura</span><span>Sem reserva de propriedade</span><span>Pedido 100% online</span><span>Seguro de proteção opcional</span>
+  </div>
+  <p class="fine" style="margin-top:8px">Condições descritas na página de crédito automóvel do Cetelem. Esta simulação não inclui o seguro opcional.</p>
+
+</section>
+
+</div>
+<div class="wrap" id="simulador">
+
+  <section class="card inputs" aria-label="Dados do crédito">
+    <div class="f price">
+      <label for="price">Valor do carro</label>
+      <div class="wrapin"><input type="number" id="price" min="5000" step="500" value="20000" inputmode="numeric"><span>€</span></div>
+      <input type="range" class="range" id="priceR" min="5000" max="100000" step="500" value="20000" aria-label="Valor do carro, de 5 000 € a 100 000 €">
+      <div class="scale" aria-hidden="true"><span>5 000 €</span><span>100 000 €</span></div>
+    </div>
+    <div class="f">
+      <label for="entrada">Entrada</label>
+      <select id="entrada">
+        <option value="0">0%</option><option value="10">10%</option><option value="20">20%</option>
+        <option value="25" selected>25%</option><option value="30">30%</option><option value="40">40%</option><option value="50">50%</option>
+      </select>
+    </div>
+    <div class="f">
+      <label for="prazo">Prazo</label>
+      <select id="prazo">
+        <option value="24">24 meses</option><option value="36" selected>36 meses</option><option value="48">48 meses</option>
+        <option value="60">60 meses</option><option value="72">72 meses</option><option value="84">84 meses</option>
+      </select>
+    </div>
+    <div class="rate" id="rate" aria-live="polite"></div>
+    <span class="warnmsg" id="warn" hidden role="status" aria-live="polite"></span>
+    <div class="sim-actions"><button type="button" class="txt-btn" id="simReset">Repor valores</button></div>
+  </section>
+
+  <div class="verdict" id="verdict" aria-live="polite">
+    <div class="mv"><img src="assets/mascote-shh.jpg" alt="" width="44" height="44"><div>
+      <span class="eyebrow">Poupança com o elétrico em 10 anos</span>
+      <div class="big" id="vBig">—</div>
+    </div>
+    </div>
+    <p id="vText">—</p>
+  </div>
+
+  <div class="mcars">
+    <article class="card mcar ice" id="mIce"></article>
+    <article class="card mcar ev" id="mEv"></article>
+  </div>
+
+  <section class="card monthly" aria-label="Comparativo mensal">
+    <div class="head">
+      <h3>Comparativo mensal</h3>
+      <p class="muted">€ por mês = custo anual ÷ 12. Diferença negativa: o elétrico gasta menos.</p>
+    </div>
+    <div class="period" role="group" aria-label="Período apresentado"><button type="button" data-act="period" data-p="p1" aria-pressed="true">Durante o crédito</button><button type="button" data-act="period" data-p="p2" aria-pressed="false">Depois do crédito</button></div>
+    <p class="rotate">Rode o telemóvel na horizontal para ver a tabela inteira.</p>
+    <div class="tbl" id="tbl" data-period="p1"></div>
+  </section>
+
+  <section class="card">
+    <div id="tenMain"></div>
+    <div class="chart-head">
+      <h3>Gasto acumulado em 10 anos</h3>
+      <div class="legend"><span><i class="dot ice"></i>Combustão</span><span><i class="dot ev"></i>Elétrico</span></div>
+    </div>
+    <div class="chart-wrap" id="chart"></div>
+  </section>
+
+  <details class="card">
+    <summary>Detalhe do crédito e do gasto em 10 anos</summary>
+    <div class="cars">
+      <article class="car" id="carIce"></article>
+      <article class="car" id="carEv"></article>
+    </div>
+  </details>
+
+</div>
+
+
+<div class="band">
+<section class="section" id="energia">
+  <div class="head">
+    <span class="kicker">Personalize</span>
+    <h2>Energia elétrica e <b>combustível</b></h2>
+    <p class="muted" style="font-size:.92rem">Altere quilómetros, percurso e preços. Todos os resultados acima atualizam.</p>
+  </div>
+</section>
+<div class="wrap">
+  <div class="energy">
+    <aside class="card side" aria-label="Personalizar utilização">
+      <div class="rng"><div class="top"><label for="kmR">Quilómetros por ano</label><output id="kmO" for="kmR"></output></div><input class="range" type="range" id="kmR" min="0" max="50000" step="500" value="15000"></div>
+      <div class="fld"><span class="lab" id="routeLab">Tipo de percurso</span>
+        <div class="seg" id="routeSeg" role="group" aria-labelledby="routeLab">
+          <button type="button" data-route="urbano" aria-pressed="false">Urbano</button><button type="button" data-route="misto" aria-pressed="true">Misto</button><button type="button" data-route="autoestrada" aria-pressed="false">Autoestrada</button>
+        </div>
+        <span class="fine" style="display:block;margin-top:6px">Escolher um percurso repõe os consumos de referência. Depois pode afiná-los.</span></div>
+      <div class="fld"><span class="lab">Onde carrega o elétrico</span>
+        <label class="sw"><input type="checkbox" id="swCasa" checked>Em casa</label>
+        <label class="sw"><input type="checkbox" id="swPub" checked>Em postos públicos lentos</label>
+        <label class="sw"><input type="checkbox" id="swRap">Em postos rápidos</label>
+        <span class="hint" id="swHint" hidden role="status">Deixe pelo menos uma opção ligada.</span>
+        <div class="rng" id="rowShareHome"><div class="top"><label for="shareHomeR">Parte carregada em casa</label><output id="shareHomeO" for="shareHomeR">80%</output></div><input class="range" type="range" id="shareHomeR" min="0" max="100" step="5" value="80"></div>
+        <div class="rng" id="rowShareFast" hidden><div class="top"><label for="shareFastR">Fora de casa, parte em posto rápido</label><output id="shareFastO" for="shareFastR">30%</output></div><input class="range" type="range" id="shareFastR" min="0" max="100" step="5" value="30"></div>
+        <p class="fine" id="mixO" aria-live="polite"></p></div>
+      <div class="rng"><div class="top"><label for="consEvR">Consumo do elétrico</label><output id="consEvO" for="consEvR"></output></div><input class="range" type="range" id="consEvR" min="10" max="26" step="0.5" value="16"></div>
+      <div class="rng"><div class="top"><label for="consIceR">Consumo da combustão</label><output id="consIceO" for="consIceR"></output></div><input class="range" type="range" id="consIceR" min="3" max="12" step="0.1" value="5.8"></div>
+      <div class="rng"><div class="top"><label for="fuelR">Preço da gasolina</label><output id="fuelO" for="fuelR"></output></div><input class="range" type="range" id="fuelR" min="1.40" max="2.60" step="0.001" value="2.001"></div>
+      <div class="rng" id="rHome"><div class="top"><label for="pHomeR">Energia elétrica em casa</label><output id="pHomeO" for="pHomeR"></output></div><input class="range" type="range" id="pHomeR" min="0.05" max="0.40" step="0.01" value="0.13"></div>
+      <div class="rng" id="rPub"><div class="top"><label for="pPubR">Posto público lento</label><output id="pPubO" for="pPubR"></output></div><input class="range" type="range" id="pPubR" min="0.20" max="0.90" step="0.01" value="0.45"></div>
+      <div class="rng off" id="rFast"><div class="top"><label for="pFastR">Posto rápido</label><output id="pFastO" for="pFastR"></output></div><input class="range" type="range" id="pFastR" min="0.30" max="1.20" step="0.01" value="0.75"></div>
+      <button type="button" class="btn ghost" id="resetBtn" style="color:var(--brand);border-color:var(--brand);align-self:flex-start">Repor valores iniciais</button>
+    </aside>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="e-save" id="eSave" aria-live="polite">
+        <div class="mv"><img src="assets/mascote-shh.jpg" alt="" width="44" height="44"><div><span class="eyebrow">Poupança anual só em energia</span><br><span class="big" id="eBig">—</span></div></div>
+        <span id="eLbl" style="font-weight:800"></span><span class="fine" id="eSub"></span>
+      </div>
+      <div class="cols2">
+        <article class="card e-cost"><h3 style="display:flex;gap:8px;align-items:center"><i class="dot ev"></i>Elétrico</h3><span class="v"><span id="eEvV"></span> <small>/ano</small></span><span class="c" id="eEvC"></span></article>
+        <article class="card e-cost"><h3 style="display:flex;gap:8px;align-items:center"><i class="dot ice"></i>Combustão</h3><span class="v"><span id="eIceV"></span> <small>/ano</small></span><span class="c" id="eIceC"></span></article>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<section class="section" id="carregamento">
+  <div class="head">
+    <span class="kicker">Elétrico</span>
+    <h2>Comparação de <b>carregamento</b></h2>
+    <p class="muted" style="font-size:.92rem">O mesmo elétrico e a mesma energia, carregados de três formas.</p>
+  </div>
+</section>
+<div class="wrap">
+  <section class="card" id="chargeMain"></section>
+  <section class="card">
+    <h3>Tarifas de referência</h3>
+    <p class="fine" style="margin:6px 0 12px">Valores publicados por terceiros, a confirmar no operador antes de qualquer uso formal. Os preços de posto público variam com o posto, o operador e a forma de pagamento. «Usar este preço» aplica a tarifa ao simulador.</p>
+    <div class="tbl-scroll"><table class="mini refs">
+      <thead><tr><th scope="col">Operador e tipo</th><th scope="col">Preço</th><th scope="col">Condições</th><th scope="col">Fonte</th><th scope="col"><span class="sr">Ação</span></th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Tarifa regulada ERSE, bi-horário em vazio<small>Em casa</small></th><td class="p">0,14 €/kWh</td><td>Sem taxa por sessão. Não inclui a potência contratada.</td><td><a href="https://www.nunoagonia.com/novidades/quanto-custa-carregar-carro-eletrico-portugal" target="_blank" rel="noopener">Nuno Agonia, tarifas ERSE</a></td><td><button type="button" class="use" data-act="use" data-k="home" data-v="0.14">Usar este preço</button></td></tr>
+        <tr><th scope="row">Continente Plug&amp;Charge<small>AC, até 22 kW</small></th><td class="p">0,35 €/kWh</td><td>Sem taxa por sessão indicada. Crédito do Cartão Continente não considerado.</td><td><a href="https://www.nunoagonia.com/novidades/quanto-custa-carregar-carro-eletrico-portugal" target="_blank" rel="noopener">Nuno Agonia, 28/10/2026</a></td><td><button type="button" class="use" data-act="use" data-k="pub" data-v="0.35">Usar este preço</button></td></tr>
+        <tr><th scope="row">Rede MOBI.E, mediana avulsa<small>Vários tipos de posto</small></th><td class="p">0,37 €/kWh</td><td>Valor estatístico, não é uma tarifa. Alguns postos cobram também ao minuto.</td><td><a href="https://www.nunoagonia.com/novidades/quanto-custa-carregar-carro-eletrico-portugal" target="_blank" rel="noopener">Nuno Agonia, dados MOBI.E</a></td><td><button type="button" class="use" data-act="use" data-k="pub" data-v="0.37">Usar este preço</button></td></tr>
+        <tr><th scope="row">IONITY Direct<small>DC, 150 kW ou mais</small></th><td class="p">0,63 €/kWh</td><td>Pagamento no posto. Com subscrição Power: 0,37 €/kWh mais 11,99 € por mês.</td><td><a href="https://fleetmagazine.pt/ionity-portugal/" target="_blank" rel="noopener">Fleet Magazine, 20/10/2026</a></td><td><button type="button" class="use" data-act="use" data-k="fast" data-v="0.63">Usar este preço</button></td></tr>
+        <tr><th scope="row">Tesla Supercharger, avulso<small>DC</small></th><td class="p">0,60 €/kWh</td><td>Preço dinâmico, entre 0,46 e 0,83 €/kWh.</td><td><a href="https://www.nunoagonia.com/novidades/quanto-custa-carregar-carro-eletrico-portugal" target="_blank" rel="noopener">Nuno Agonia, dados MOBI.E</a></td><td><button type="button" class="use" data-act="use" data-k="fast" data-v="0.60">Usar este preço</button></td></tr>
+      </tbody></table></div>
+  </section>
+</div>
+
+<div class="band">
+<section class="section" id="pressupostos">
+  <div class="head">
+    <span class="kicker">Pressupostos</span>
+    <h2>De onde vêm <b>estes números</b></h2>
+  </div>
+  <div class="assump">
+    <div class="card">
+      <h3><i class="dot ice" style="background:var(--brand)"></i>Crédito Cetelem (Auto Novo)</h3>
+      <p>As mesmas taxas para o elétrico e para o carro a combustão. A TAN muda com o prazo, dentro do intervalo publicado pelo Cetelem (TAN de 7,65% a 9,76%; TAEG de 9,6% a 11,2%). <strong>Confirmado no simulador:</strong> 24 e 36 meses a 7,65% (5&nbsp;000&nbsp;€ a 24 meses: 226,05&nbsp;€/mês, TAEG 10,2%, MTIC 5&nbsp;513,20&nbsp;€; a 36 meses: 156,59&nbsp;€/mês, TAEG 9,6%). <strong>Prazos de 48 a 84 meses estimados:</strong> a 84 meses foi usada a TAN máxima publicada (9,76%), porque é o único prazo em que essa taxa fica junto do limite de 11,2% de TAEG (este cálculo dá 11,3%, uma diferença de arredondamento face ao Cetelem). Os prazos de 48, 60 e 72 meses ficam entre os dois pontos confirmados (8,18%, 8,71% e 9,23%): devem ser confirmados no simulador oficial. A entrada reduz o montante financiado e, com ele, a mensalidade e os juros. A mensalidade inclui o imposto do selo de 4% sobre os juros; o de 1,76% sobre o capital é pago no início. Montantes de 5&nbsp;000 a 75&nbsp;000&nbsp;€.</p>
+    </div>
+    <div class="card">
+      <h3><i class="dot ev"></i>Utilização (fixa nos 10 anos)</h3>
+      <p>15&nbsp;000&nbsp;km por ano. Gasolina a 2,001&nbsp;€/L (média DGEG, 4/11/2026) e 5,8&nbsp;L/100&nbsp;km. Eletricidade a 0,19&nbsp;€/kWh (80% em casa em bi-horário, 20% em posto público) e 16&nbsp;kWh/100&nbsp;km. Energia sobe 2% por ano. Manutenção média de 0,033&nbsp;€/km (combustão) e 0,021&nbsp;€/km (elétrico). IUC de cerca de 150&nbsp;€/ano (elétrico isento). Inspeções aos 4, 6 e 8 anos e depois anuais (36&nbsp;€). Seguro de 380 e 420&nbsp;€/ano. <strong>Valores de referência, sem desvalorização e sem incentivos.</strong></p>
+    </div>
+  </div>
+    <dl class="nl">
+    <dt>Preço dos veículos</dt><dd><span class="src est">Estimativa</span>Mesmo preço nos dois carros. Como o crédito é igual, a poupança em 10 anos não muda com o preço, a entrada ou o prazo. Muda com quilómetros, consumos e preços da energia. O quadro «elétrico mais caro pelo mesmo valor» mostra o outro lado.</dd>
+    <dt>Combustível</dt><dd><span class="src of">Fonte oficial</span>2,001 €/L de gasolina 95 simples, média DGEG a 4/11/2026, conforme reportado pelo Simula (2,091 €/L a 25/10, menos 9 cêntimos desde então).</dd>
+    <dt>Consumos</dt><dd><span class="src est">Estimativa</span>Elétrico: 14 kWh/100 km (urbano), 16 (misto) e 19,5 (autoestrada). Combustão: 7,2, 5,8 e 6,3 L/100 km.</dd>
+    <dt>Energia elétrica</dt><dd><span class="src est">Estimativa</span>0,13 €/kWh em casa, 0,45 em posto lento e 0,75 em posto rápido. Por defeito, 80% em casa e 20% na rua (cerca de 0,19 €/kWh).</dd>
+    <dt>Evolução de preços</dt><dd><span class="src est">Estimativa</span>Energia e combustível sobem 2% ao ano. Os restantes custos ficam fixos.</dd>
+    <dt>Como se acumulam os custos</dt><dd>Somam-se ano a ano as mensalidades, a energia, a manutenção, os impostos e o seguro. Os valores da tabela mensal são médias de cada período.</dd>
+    <dt>O que fica de fora</dt><dd>Desvalorização e revenda, incentivos à compra, instalação de carregador, potência contratada, pneus, portagens, estacionamento e seguro de proteção de crédito opcional.</dd>
+    <dt>Dados em falta</dt><dd><span class="src miss">Em falta</span>TAN oficial dos prazos de 48 a 84 meses. Capacidade da bateria (sem custo de carregamento completo). Preço de compra diferente por carro.</dd>
+  </dl>
+  <div class="disclaimer" style="margin-top:16px">
+    <span class="ic">!</span>
+    <p><strong>Nota metodológica:</strong> o valor de compra do carro é o mesmo para as duas versões — só muda o custo de o usar. Por isso, a poupança de 10 anos reflete apenas as diferenças de energia, manutenção, seguro e taxas: não muda quando altera o valor do carro, a entrada ou o prazo, porque o crédito em si é idêntico nos dois lados da comparação. As mensalidades, os totais mensais e o gráfico mudam normalmente com os três campos.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="disclaimer">
+    <span class="ic">i</span>
+    <p><strong>Projeto académico — simulação não oficial.</strong> Não é uma proposta de crédito real nem substitui o simulador oficial Cetelem. Fontes: <span class="sources"><a href="https://www.cetelem.pt/content/cetelem/pt/creditos/credito-automovel-outros-veiculos.html" target="_blank" rel="noopener">Cetelem: crédito automóvel</a> · <a href="https://www.cetelem.pt/content/dam/cetelem/pt/documents/pre%C3%A7%C3%A1rio/PRE-FT-202611.pdf" target="_blank" rel="noopener">Preçário Cetelem (nov. 2026)</a> · <a href="https://precocombustivel.pt/precos-semana" target="_blank" rel="noopener">Preços DGEG</a> · <a href="https://simula.pt/noticias/gpl-gasolina-precos-novembro-2026/" target="_blank" rel="noopener">Simula, 4/11/2026</a> · <a href="https://www.erse.pt/media/ayjnjjp5/tarifas-e-proveitos-egme-2026.pdf" target="_blank" rel="noopener">ERSE, tarifas MOBI.E</a> · <a href="https://ecoimport.pt/incentivos-carro-eletrico-2026-portugal/" target="_blank" rel="noopener">ISV e IUC dos elétricos</a></span></p>
+  </div>
+</section>
+
+<section class="section">
+  <details class="card">
+    <summary>Sobre este MVP: proposta de projeto</summary>
+    <div class="prop-grid">
+      <div><h4>Problema</h4><p>O simulador tradicional mostra a mensalidade, mas não o custo de ter o carro. Quem compara elétrico e combustão decide sem essa informação.</p></div>
+      <div><h4>Proposta</h4><p>Juntar, na mesma página do crédito, o custo mensal e de 10 anos de cada carro, com pressupostos visíveis e editáveis.</p></div>
+      <div><h4>Valor para o cliente</h4><p>Decisão mais informada e crédito responsável, sem esconder informação relevante.</p></div>
+      <div><h4>Valor para o Cetelem</h4><p>Experiência digital diferenciada, ligação à mobilidade sustentável e pedidos de crédito de clientes mais bem informados.</p></div>
+      <div style="grid-column:1/-1"><h4>Próximos passos</h4><p>Validar com testes de utilização, ligar ao pedido de crédito online, preço diferente por carro, ponto de equilíbrio em quilómetros e incentivos públicos quando estiverem abertos.</p></div>
+    </div>
+  </details>
+</section>
+
+</div>
+<a class="float-save" id="floatSave" href="#simulador" hidden aria-label="Ir para o simulador">
+  <img src="assets/mascote-shh.jpg" alt="" width="36" height="36">
+  <span><small>Poupança em 10 anos</small><b id="fsVal">—</b></span>
+</a>
+<footer><div class="inner">
+  <div class="row">
+    <span class="brand"><img class="brandmark" src="assets/cetelem-logo.svg" alt="Cetelem" width="89" height="28"><span class="brandsub">Elétrico vs Combustão · Auto Novo</span></span>
+    <span>Proposta académica de MVP (IPAM) para o Cetelem · simulação sem valor contratual</span>
+  </div>
+  <span>Logótipo e mascote Cetelem mostrados apenas como referência visual de marca para este trabalho académico; os direitos pertencem à Cetelem / BNP Paribas Personal Finance, Sucursal em Portugal.</span>
+</div></footer>
+
+<script>
+(function(){
+const C = {
+  fuel:2.001, consIce:5.8, consEv:16, kwh:0.13*0.8+0.45*0.2,
+  mIce:0.033, mEv:0.021, iuc:150, ipo:36, insIce:380, insEv:420, infl:0.02,
+  km:15000, anos:10
+};
+// TAN Crédito Auto Novo por prazo. 24/36 confirmados no simulador cetelem.pt; 84 = TAN máxima publicada; 48/60/72 interpolados.
+const RATES = {24:{tan:7.65}, 36:{tan:7.65}, 48:{tan:8.18, est:true}, 60:{tan:8.71, est:true}, 72:{tan:9.23, est:true}, 84:{tan:9.76, est:true}};
+
+const $ = id => document.getElementById(id);
+const eur = new Intl.NumberFormat("pt-PT",{style:"currency",currency:"EUR",maximumFractionDigits:0});
+const eur2 = new Intl.NumberFormat("pt-PT",{style:"currency",currency:"EUR",minimumFractionDigits:2,maximumFractionDigits:2});
+const pct1 = new Intl.NumberFormat("pt-PT",{style:"percent",minimumFractionDigits:1,maximumFractionDigits:1});
+const n2 = new Intl.NumberFormat("pt-PT",{minimumFractionDigits:2,maximumFractionDigits:2});
+const num = new Intl.NumberFormat("pt-PT");
+const pct0 = new Intl.NumberFormat("pt-PT",{style:"percent",maximumFractionDigits:0});
+const n1 = new Intl.NumberFormat("pt-PT",{minimumFractionDigits:1,maximumFractionDigits:1});
+const n3 = new Intl.NumberFormat("pt-PT",{minimumFractionDigits:3,maximumFractionDigits:3});
+const signed = v => (v<0?"−":"")+eur.format(Math.abs(v));
+const plus = v => (v>0?"+":v<0?"−":"")+eur.format(Math.abs(v));
+const ROUTES = {urbano:{ev:14,ice:7.2}, misto:{ev:16,ice:5.8}, autoestrada:{ev:19.5,ice:6.3}};
+const DEF = {km:15000, route:"misto", fuel:2.001, pHome:0.13, pPub:0.45, pFast:0.75, casa:true, pub:true, rap:false, shareHome:80, shareFast:30};
+const SIM_DEF = {price:20000, entrada:"25", prazo:"36"};
+let route = "misto", costsOpen = false, chargeTab = "home", lastInfo = null;
+
+// Calibrado com o simulador cetelem.pt: mensalidade = anuidade com TAN × 1,04 (imposto do selo sobre os juros)
+// e imposto do selo de 1,76% sobre o capital no início. 5 000 € a 24 meses → 226,05 €/mês; a 36 meses → 156,59 €/mês.
+function loan(P, n, tan){
+  if(P<=0) return {P:0, pmt:0, interest:0, isCap:0, cost:0, taeg:0, perYear:[]};
+  const isCap = P*0.0176, i = tan*1.04/1200;
+  const pmt = P*i/(1-Math.pow(1+i,-n));
+  const perYear = [];
+  for(let m=1;m<=n;m++){ const y = Math.ceil(m/12); perYear[y] = (perYear[y]||0)+pmt; }
+  const charged = pmt*n - P;
+  const net = P - isCap, npv = r => { let v=net, d=1; for(let m=1;m<=n;m++){ d*=1+r; v-=pmt/d; } return v; };
+  let lo=0, hi=0.05; for(let k=0;k<80;k++){ const mid=(lo+hi)/2; if(npv(mid)>0) hi=mid; else lo=mid; }
+  return {P, pmt, interest:charged/1.04, isCap, cost:charged+isCap, taeg:Math.pow(1+lo,12)-1, perYear};
+}
+
+function sim(price, entrada, prazo){
+  const down = Math.round(price*entrada/100);
+  const L = loan(Math.max(0, price-down), prazo, RATES[prazo].tan);
+  const out = {L, down};
+  ["ice","ev"].forEach(k=>{
+    const t = {car:down+L.isCap, energy:0, maint:0, taxes:0, ins:0};
+    const cum = [t.car], years = [];
+    for(let y=1;y<=C.anos;y++){
+      const f = Math.pow(1+C.infl, y-1);
+      const energy = k==="ice" ? C.km*C.consIce/100*C.fuel*f : C.km*C.consEv/100*C.kwh*f;
+      const maint = C.km*(k==="ice"?C.mIce:C.mEv);
+      const taxes = (k==="ice"?C.iuc:0) + ((y===4||y===6||y>=8)?C.ipo:0);
+      const ins = k==="ice"?C.insIce:C.insEv;
+      const pay = L.perYear[y]||0;
+      years[y] = {pay, energy, maint, taxes, ins};
+      t.car += pay; t.energy += energy; t.maint += maint; t.taxes += taxes; t.ins += ins;
+      cum.push(cum[y-1]+pay+energy+maint+taxes+ins);
+    }
+    t.total = cum[C.anos];
+    out[k] = {t, cum, years};
+  });
+  return out;
+}
+
+function monthly(d, y1, y2){
+  const m = {pay:0, energy:0, maint:0, taxes:0, ins:0}, months = (y2-y1+1)*12;
+  for(let y=y1;y<=y2;y++) for(const k in m) m[k] += d.years[y][k];
+  for(const k in m) m[k] /= months;
+  m.total = m.pay+m.energy+m.maint+m.taxes+m.ins;
+  return m;
+}
+
+function diffPill(d){
+  const v = Math.round(d);
+  if(v<0) return `<span class="d save">−${num.format(-v)} €</span>`;
+  if(v>0) return `<span class="d more">+${num.format(v)} €</span>`;
+  return `<span class="d eq">=</span>`;
+}
+
+const ROWS = [
+  ["pay","Mensalidade","Cetelem"],
+  ["energy","Energia","combustível / luz"],
+  ["maint","Manutenção",""],
+  ["taxes","Taxas","IUC e inspeções"],
+  ["ins","Seguro",""],
+  ["total","Custo mensal","total"]
+];
+function usageHTML(info, T, prazo){
+  const rname = {urbano:"percurso urbano", misto:"percurso misto", autoestrada:"autoestrada"}[route] || "percurso personalizado";
+  const sh = info.sh, parts = [];
+  const hp = Math.round(sh.home*100), fp = Math.round(sh.fast*100), pp = 100-hp-fp;
+  if(hp>0) parts.push(`${hp}% em casa a ${n2.format(info.P.home)} €`);
+  if(pp>0) parts.push(`${pp}% em posto lento a ${n2.format(info.P.pub)} €`);
+  if(fp>0) parts.push(`${fp}% em posto rápido a ${n2.format(info.P.fast)} €`);
+  const kmTxt = `${num.format(C.km)} km, ${rname}`;
+  const kwhYear = C.km*C.consEv/100, litYear = C.km*C.consIce/100, yEv = kwhYear*C.kwh, yIce = litYear*C.fuel;
+  const col = (title, k, rows) => `<div class="calc"><h4><i class="dot ${k}"></i>${title}</h4><dl>${rows.map(([a,b,t])=>`<dt${t?' class="t"':""}>${a}</dt><dd${t?' class="t"':""}>${b}</dd>`).join("")}</dl></div>`;
+  return `<div class="calc-grid">
+    ${col("Elétrico","ev",[["Quilómetros por ano",kmTxt],["Consumo",`${n1.format(C.consEv)} kWh/100 km`],["Energia por ano",`${num.format(Math.round(kwhYear))} kWh`],["Onde carrega",parts.join(", ")],["Preço médio",`${n2.format(C.kwh)} €/kWh`],["Custo no 1.º ano",`${eur.format(yEv)} (${eur.format(yEv/12)} por mês)`],["Média por mês na tabela",eur.format(T.b1.energy),true]])}
+    ${col("Combustão","ice",[["Quilómetros por ano",kmTxt],["Consumo",`${n1.format(C.consIce)} L/100 km`],["Combustível por ano",`${num.format(Math.round(litYear))} L`],["Preço da gasolina",`${n3.format(C.fuel)} €/L${Math.abs(C.fuel-DEF.fuel)<0.0005?" (média DGEG, 4/11/2026)":""}`],["Custo no 1.º ano",`${eur.format(yIce)} (${eur.format(yIce/12)} por mês)`],["Média por mês na tabela",eur.format(T.a1.energy),true]])}
+  </div>
+  <p class="xnote">A média da tabela fica um pouco acima do 1.º ano porque a energia e o combustível sobem ${pct0.format(C.infl)} ao ano. Depois do crédito (meses ${prazo+1} a 120), a média passa para ${eur.format(T.b2.energy)} por mês no elétrico e ${eur.format(T.a2.energy)} na combustão.</p>`;
+}
+function table(R, prazo, info){
+  const ly = prazo/12;
+  const a1 = monthly(R.ice,1,ly), b1 = monthly(R.ev,1,ly);
+  const a2 = monthly(R.ice,ly+1,C.anos), b2 = monthly(R.ev,ly+1,C.anos);
+  const TT = {a1,b1,a2,b2};
+  const body = ROWS.map(([k,l,sub])=>{
+    const btn = k==="energy" ? `<br><button type="button" class="more-btn" id="costsBtn" data-act="costs" aria-expanded="${costsOpen}" aria-controls="costsRow">Saber mais</button>` : "";
+    const row = `<tr${k==="total"?' class="tot"':""}>
+      <th scope="row">${l}${sub?`<small>${sub}</small>`:""}${btn}</th>
+      <td class="g p1 ice">${eur.format(a1[k])}</td><td class="p1 ev">${eur.format(b1[k])}</td><td class="p1">${diffPill(b1[k]-a1[k])}</td>
+      <td class="g p2 ice">${eur.format(a2[k])}</td><td class="p2 ev">${eur.format(b2[k])}</td><td class="p2">${diffPill(b2[k]-a2[k])}</td>
+    </tr>`;
+    if(k!=="energy") return row;
+    return row + `<tr class="xrow" id="costsRow"${costsOpen?"":" hidden"}><td colspan="7"><div class="xpanel" role="region" aria-labelledby="costsTitle">
+        <h4 id="costsTitle">Energia: de onde vêm estes valores</h4>
+        <p class="xnote">Quilómetros × consumo × preço. Pode mudar estes valores na secção <a class="link" href="#energia">Energia</a>.</p>
+        ${usageHTML(info, TT, prazo)}</div></td></tr>`;
+  }).join("");
+  $("tbl").innerHTML = `<table>
+    <caption class="sr">Comparativo mensal entre o carro a combustão e o elétrico</caption>
+    <thead>
+      <tr class="grp"><th rowspan="2" scope="col">€/mês</th>
+        <th colspan="3" class="g p1" scope="colgroup">Durante o crédito<small>meses 1–${prazo}</small></th>
+        <th colspan="3" class="g p2" scope="colgroup">Depois do crédito<small>meses ${prazo+1}–120</small></th></tr>
+      <tr><th class="g p1" scope="col">Combustão</th><th class="p1" scope="col">Elétrico</th><th class="p1" scope="col">Diferença</th>
+        <th class="g p2" scope="col">Combustão</th><th class="p2" scope="col">Elétrico</th><th class="p2" scope="col">Diferença</th></tr>
+    </thead>
+    <tbody>${body}</tbody></table>`;
+  return {a1, b1, a2, b2, d1:a1.total-b1.total, d2:a2.total-b2.total, ly};
+}
+
+function tenHTML(R){
+  const a = R.ice.t, b = R.ev.t, d = a.total - b.total;
+  const rows = [["car","Carro","entrada, selo e mensalidades"],["energy","Energia","combustível ou eletricidade"],["maint","Manutenção",""],["taxes","IUC e inspeções",""],["ins","Seguro",""]];
+  return `<div class="ten-sum">
+      <div><span class="lbl">Combustão</span><span class="v ice">${eur.format(a.total)}</span></div>
+      <div><span class="lbl">Elétrico</span><span class="v ev">${eur.format(b.total)}</span></div>
+      <div class="hl${d<0?" bad":""}"><span class="lbl">${d>=0?"Poupança estimada com o elétrico":"Custo adicional do elétrico"}</span><span class="v">${eur.format(Math.abs(d))}</span></div>
+    </div>
+    <div class="tbl-scroll"><table class="mini">
+      <caption class="sr">Gastos acumulados em 10 anos por categoria</caption>
+      <thead><tr><th scope="col">Categoria</th><th scope="col">Combustão</th><th scope="col">Elétrico</th><th scope="col">Diferença</th></tr></thead>
+      <tbody>${rows.map(([k,l,sub])=>`<tr><th scope="row">${l}${sub?`<small>${sub}</small>`:""}</th><td>${eur.format(a[k])}</td><td>${eur.format(b[k])}</td><td>${diffPill(b[k]-a[k])}</td></tr>`).join("")}
+      <tr class="tot"><th scope="row">Total em 10 anos</th><td>${eur.format(a.total)}</td><td>${eur.format(b.total)}</td><td>${diffPill(b.total-a.total)}</td></tr></tbody>
+    </table></div>`;
+}
+
+/* ---------- Energia: controlos ---------- */
+function readEnergy(){
+  C.km = +$("kmR").value; C.consEv = +$("consEvR").value; C.consIce = +$("consIceR").value; C.fuel = +$("fuelR").value;
+  const P = {home:+$("pHomeR").value, pub:+$("pPubR").value, fast:+$("pFastR").value};
+  const casa = $("swCasa").checked, pub = $("swPub").checked, rap = $("swRap").checked, out = pub || rap;
+  const h = casa ? (out ? +$("shareHomeR").value/100 : 1) : 0;
+  const f = (pub && rap) ? +$("shareFastR").value/100 : (rap ? 1 : 0);
+  const sh = {home:h, pub:(1-h)*(1-f), fast:(1-h)*f};
+  C.kwh = sh.home*P.home + sh.pub*P.pub + sh.fast*P.fast;
+  $("kmO").textContent = num.format(C.km)+" km";
+  $("consEvO").textContent = n1.format(C.consEv)+" kWh/100 km"; $("consIceO").textContent = n1.format(C.consIce)+" L/100 km";
+  $("fuelO").textContent = n3.format(C.fuel)+" €/L";
+  $("pHomeO").textContent = n2.format(P.home)+" €/kWh"; $("pPubO").textContent = n2.format(P.pub)+" €/kWh"; $("pFastO").textContent = n2.format(P.fast)+" €/kWh";
+  $("shareHomeO").textContent = Math.round(+$("shareHomeR").value)+"%"; $("shareFastO").textContent = Math.round(+$("shareFastR").value)+"%";
+  $("rowShareHome").hidden = !(casa && out); $("rowShareFast").hidden = !(pub && rap);
+  [["rHome",casa],["rPub",pub],["rFast",rap]].forEach(([id,on])=>$(id).classList.toggle("off",!on));
+  const hp = Math.round(sh.home*100); let fp = 0, pp = 0;
+  if(pub && rap){ fp = Math.round(sh.fast*100); pp = 100-hp-fp; } else if(pub) pp = 100-hp; else if(rap) fp = 100-hp;
+  const parts = []; if(hp>0) parts.push(hp+"% em casa"); if(pp>0) parts.push(pp+"% em posto lento"); if(fp>0) parts.push(fp+"% em posto rápido");
+  $("mixO").textContent = `Repartição: ${parts.join(", ")}. Preço médio: ${n2.format(C.kwh)} €/kWh.`;
+  return {P, sh};
+}
+function renderEnergy(R){
+  const eEv = C.km*C.consEv/100*C.kwh, eIce = C.km*C.consIce/100*C.fuel, save = eIce - eEv;
+  $("eBig").textContent = eur.format(Math.abs(save));
+  $("eSave").classList.toggle("bad", save<0);
+  $("eLbl").textContent = save<0 ? "a mais por ano com o elétrico, só em energia" : "poupados por ano em energia com o elétrico";
+  const yi = R.ice.years[1], ye = R.ev.years[1];
+  const rd = (yi.energy+yi.maint+yi.taxes+yi.ins) - (ye.energy+ye.maint+ye.taxes+ye.ins);
+  $("eSub").textContent = C.km>0 ? `Valores do 1.º ano. Somando manutenção, IUC, inspeções e seguro, o elétrico fica ${eur.format(Math.abs(rd))} ${rd>=0?"mais barato":"mais caro"} por ano.` : "Com 0 km não há energia a pagar. Indique quantos quilómetros faz por ano.";
+  $("eEvV").textContent = eur.format(eEv); $("eEvC").textContent = `${eur2.format(C.consEv*C.kwh)} por 100 km, a ${n2.format(C.kwh)} €/kWh em média`;
+  $("eIceV").textContent = eur.format(eIce); $("eIceC").textContent = `${eur2.format(C.consIce*C.fuel)} por 100 km`;
+}
+
+/* ---------- Carregamento ---------- */
+function growth(){ let g=0; for(let y=1;y<=C.anos;y++) g+=Math.pow(1+C.infl,y-1); return g; }
+function renderCharge(info){
+  const kwh = C.km*C.consEv/100, g = growth();
+  const DESC = {home:"Carregamento com a energia da instalação de casa, numa tomada própria ou numa wallbox.", pub:"Postos públicos em corrente alternada (AC), até 22 kW.", fast:"Postos públicos em corrente contínua (DC), normalmente a partir de 50 kW."};
+  const S = [["home","Em casa",info.P.home],["pub","Na rua, carregamento lento",info.P.pub],["fast","Na rua, carregamento rápido",info.P.fast]]
+    .map(([k,nm,p])=>({k,nm,p,per100:C.consEv*p,year:kwh*p,month:kwh*p/12,ten:kwh*p*g}));
+  const h = S[0]; S.forEach(s=>{ s.dYear = s.year-h.year; s.dPct = h.p>0 ? (s.p-h.p)/h.p : 0; });
+  const mn = Math.min(...S.map(s=>s.p)), mx = Math.max(...S.map(s=>s.p));
+  S.forEach(s=>{ s.isLow = mn!==mx && s.p===mn; s.isHigh = mn!==mx && s.p===mx; });
+  const diffTxt = s => s.k==="home" ? "Cenário de referência" : `${plus(s.dYear)} por ano (${s.dPct>0?"+":""}${pct0.format(s.dPct)})`;
+  const tabs = S.map(s=>`<button type="button" role="tab" id="tab-${s.k}" aria-controls="panel-${s.k}" aria-selected="${s.k===chargeTab}" tabindex="${s.k===chargeTab?0:-1}" data-act="ctab" data-k="${s.k}">${s.nm}</button>`).join("");
+  const panels = S.map(s=>`<div class="cpanel" role="tabpanel" id="panel-${s.k}" aria-labelledby="tab-${s.k}" tabindex="0"${s.k===chargeTab?"":" hidden"}>
+      <div><span class="v">${eur.format(s.month)} <small>por mês</small></span><p class="muted" style="margin-top:8px;font-size:.92rem">${DESC[s.k]} Usa o preço correspondente do simulador.</p></div>
+      <dl><dt>Preço por kWh</dt><dd>${n2.format(s.p)} €/kWh</dd><dt>Consumo</dt><dd>${n1.format(C.consEv)} kWh/100 km</dd><dt>Energia por ano</dt><dd>${num.format(Math.round(kwh))} kWh</dd><dt>Custo por 100 km</dt><dd>${eur2.format(s.per100)}</dd><dt>Custo anual</dt><dd>${eur.format(s.year)}</dd><dt>Custo em 10 anos</dt><dd>${eur.format(s.ten)}</dd><span class="rule"></span><dt class="t">Face a carregar em casa</dt><dd class="t">${diffTxt(s)}</dd></dl></div>`).join("");
+  const row = (label,tag,p,per100,month,year,face,cls)=>`<tr${cls?` class="${cls}"`:""}><th scope="row">${label}${tag||""}</th><td>${n2.format(p)} €</td><td>${eur2.format(per100)}</td><td>${eur.format(month)}</td><td>${eur.format(year)}</td><td>${face}</td></tr>`;
+  const mixYear = kwh*C.kwh, mixD = mixYear-h.year;
+  const low = S.find(s=>s.isLow), high = S.find(s=>s.isHigh);
+  const take = C.km<=0 ? "Indique os quilómetros por ano para comparar os custos." : !low ? "Com estes preços, os três cenários custam o mesmo." : `Com estes preços, carregar ${low.nm.toLowerCase().replace("na rua, ","na rua, ")} é a opção mais barata e ${high.nm.toLowerCase()} a mais cara: ${eur.format(high.year-low.year)} de diferença por ano para os mesmos ${num.format(C.km)} km.`;
+  $("chargeMain").innerHTML = `<h3 style="margin-bottom:12px">Casa, rua lenta ou rua rápida</h3>
+    <div class="ctabs" role="tablist" aria-label="Forma de carregamento">${tabs}</div>${panels}
+    <div class="cblock"><h4>Os três cenários lado a lado</h4>
+      <div class="tbl-scroll" style="margin-top:8px"><table class="mini">
+        <caption class="sr">Custos de energia por forma de carregamento</caption>
+        <thead><tr><th scope="col">Forma de carregamento</th><th scope="col">Preço/kWh</th><th scope="col">Por 100 km</th><th scope="col">Por mês</th><th scope="col">Por ano</th><th scope="col">Face a casa</th></tr></thead>
+        <tbody>${S.map(s=>row(s.nm,s.isLow?'<span class="tag2 low">Mais barato</span>':s.isHigh?'<span class="tag2 high">Mais caro</span>':"",s.p,s.per100,s.month,s.year,s.k==="home"?"Referência":`${plus(s.dYear)} (${s.dPct>0?"+":""}${pct0.format(s.dPct)})`)).join("")}
+        ${row("A sua repartição",'<span class="tag2 mine">Usada no simulador</span>',C.kwh,C.consEv*C.kwh,mixYear/12,mixYear,`${plus(mixD)} (${h.p>0?((C.kwh-h.p)/h.p>0?"+":""):""}${pct0.format(h.p>0?(C.kwh-h.p)/h.p:0)})`,"tot")}</tbody></table></div>
+      <p class="takeaway" aria-live="polite"><img src="assets/mascote-shh.jpg" alt="" width="30" height="30"><span>${take}</span></p>
+      <p class="fine" style="margin-top:6px">Valores do 1.º ano; nos 10 anos, os preços sobem 2% ao ano. O custo de um carregamento completo não é calculado porque o modelo não define a capacidade da bateria.</p></div>`;
+  document.querySelectorAll('[data-act="use"]').forEach(b=>{
+    const cur = {home:info.P.home,pub:info.P.pub,fast:info.P.fast}[b.dataset.k], on = Math.abs(cur-(+b.dataset.v))<0.0001;
+    b.setAttribute("aria-pressed",String(on)); b.textContent = on ? "Em uso" : "Usar este preço";
+  });
+}
+
+// Que elétrico se compra gastando por mês o mesmo que com o carro a combustão (durante o crédito),
+// com a mesma entrada em euros, o mesmo prazo e a mesma taxa. Seguro e manutenção do elétrico mantêm-se.
+function upgrade(R, T, prazo){
+  const budget = T.a1.total, running = T.b1.total - T.b1.pay;
+  const pay = budget - running, i = RATES[prazo].tan*1.04/1200;
+  let P = pay*(1-Math.pow(1+i,-prazo))/i, capped = false;
+  if(P > 75000){ P = 75000; capped = true; }
+  const price = Math.floor((R.down + P)/100)*100;
+  const Pr = price - R.down, L = loan(Pr, prazo, RATES[prazo].tan);
+  return {budget, running, pay:L.pmt, price, P:Pr, extra:price - (R.down + R.L.P), isCap:L.isCap, capped, ok: Pr >= 5000 && R.L.P > 0};
+}
+
+function mcard(k, R, T, prazo){
+  const L = R.L, rt = RATES[prazo], name = k==="ice"?"Combustão":"Elétrico";
+  const m1 = k==="ice"?T.a1:T.b1, m2 = k==="ice"?T.a2:T.b2;
+  let s = `<h3><i class="dot ${k}"></i>${name}</h3>
+    <div class="pmt">
+      <span class="eyebrow">Custo mensal total</span>
+      <span class="v ${k}">${eur.format(m1.total)} <small>/mês · primeiros ${prazo} meses</small></span>
+      <span class="s">inclui mensalidade Cetelem de ${eur2.format(L.pmt)} · TAN ${n2.format(rt.tan)}%${rt.est?"*":""} · TAEG ${pct1.format(L.taeg)}</span>
+    </div>
+    <dl>
+      <span class="sub">Por mês durante o crédito</span>
+      <dt>Mensalidade</dt><dd>${eur.format(m1.pay)}</dd>
+      <dt>${k==="ice"?"Combustível":"Eletricidade"}</dt><dd>${eur.format(m1.energy)}</dd>
+      <dt>Manutenção</dt><dd>${eur.format(m1.maint)}</dd>
+      <dt>${k==="ice"?"Taxas (IUC e inspeções)":"Taxas (inspeções; IUC isento)"}</dt><dd>${eur.format(m1.taxes)}</dd>
+      <dt>Seguro</dt><dd>${eur.format(m1.ins)}</dd>
+      <span class="rule"></span>
+      <dt class="t">Depois do crédito, até aos 10 anos</dt><dd class="t ${k}">${eur.format(m2.total)}/mês</dd>
+    </dl>`;
+  if(k==="ice"){
+    const U = upgrade(R, T, prazo);
+    if(U.ok && U.extra >= 100){
+      s += `<details class="upg">
+        <summary><img class="tip-ico" src="assets/mascote-shh.jpg" alt="" aria-hidden="true" width="28" height="28"><span>Com os ${eur.format(U.budget)}/mês que gasta neste carro, consegue um financiamento Cetelem de <b>${eur.format(U.P)}</b> para um elétrico mais caro, até ${eur.format(U.price)}</span><span class="more" aria-hidden="true">+</span></summary>
+        <div class="body">
+          <p>Pagando o mesmo por mês, compra um elétrico de ${eur.format(U.price)}: mais <strong class="good">${eur.format(U.extra)}</strong> de carro do que este de ${eur.format(R.down + R.L.P)}.</p>
+          <dl>
+            <dt>Entrada (a mesma)</dt><dd>${eur.format(R.down)}</dd>
+            <dt>Montante financiado</dt><dd>${eur.format(U.P)}</dd>
+            <dt>Mensalidade Cetelem do elétrico</dt><dd>${eur2.format(U.pay)}</dd>
+            <dt>Eletricidade, manutenção, taxas e seguro</dt><dd>${eur.format(U.running)}</dd>
+            <span class="rule"></span>
+            <dt class="t">Total por mês com o elétrico</dt><dd class="t ev">${eur.format(U.pay + U.running)}</dd>
+          </dl>
+          <p class="fine">Mesmo prazo (${prazo} meses) e mesma taxa. Acresce o imposto do selo de ${eur.format(U.isCap)} no início.${U.capped?" Limitado ao máximo de 75 000 € financiados pelo Cetelem.":""} Eletricidade, seguro e manutenção iguais aos do elétrico de ${eur.format(R.down + R.L.P)}; num carro mais caro o seguro tende a subir.</p>
+        </div>
+      </details>`;
+    } else {
+      s += `<details class="upg na"><summary><img class="tip-ico" src="assets/mascote-shh.jpg" alt="" aria-hidden="true" width="28" height="28"><span>${R.L.P>0?"Com estes valores, o que gasta por mês neste carro não chega para financiar um elétrico mais caro.":"Sem crédito não há mensalidade para comparar."}</span></summary></details>`;
+    }
+  }
+  return s;
+}
+
+function card(k, R){
+  const {t} = R[k], L = R.L, name = k==="ice"?"Combustão":"Elétrico";
+  return `<h3><i class="dot ${k}"></i>${name}</h3>
+    <dl>
+      <dt>Entrada</dt><dd>${eur.format(R.down)}</dd>
+      <dt>Montante financiado</dt><dd>${eur.format(L.P)}</dd>
+      <dt>Juros</dt><dd>${eur.format(L.interest)}</dd>
+      <dt>Imposto do selo</dt><dd>${eur.format(L.cost-L.interest)}</dd>
+      <dt class="t">Custo total do crédito</dt><dd class="t">${eur.format(L.cost)}</dd>
+      <span class="sub">Gasto em 10 anos</span>
+      <dt>Carro (entrada, selo e mensalidades)</dt><dd>${eur.format(t.car)}</dd>
+      <dt>${k==="ice"?"Combustível":"Eletricidade"}</dt><dd>${eur.format(t.energy)}</dd>
+      <dt>Manutenção</dt><dd>${eur.format(t.maint)}</dd>
+      <dt>${k==="ice"?"IUC e inspeções":"Inspeções (IUC isento)"}</dt><dd>${eur.format(t.taxes)}</dd>
+      <dt>Seguro</dt><dd>${eur.format(t.ins)}</dd>
+      <span class="rule"></span>
+      <dt class="t">Total</dt><dd class="t ${k}">${eur.format(t.total)}</dd>
+    </dl>`;
+}
+
+function niceStep(range, target){
+  const raw = range/target, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw/p;
+  return (f<1.5?1:f<3?2:f<7?5:10)*p;
+}
+let last = null, loanYears = 0;
+function chart(R){
+  last = R;
+  const box = $("chart");
+  const W = Math.max(280, box.clientWidth), H = W<520?200:250;
+  const m = {l:52, r:W<520?14:84, t:12, b:28};
+  const a = R.ice.cum, b = R.ev.cum, N = a.length-1;
+  const maxV = Math.max(...a, ...b);
+  const step = niceStep(maxV,5), yMax = Math.ceil(maxV/step)*step;
+  const x = i => m.l + (W-m.l-m.r)*(i/N);
+  const y = v => m.t + (H-m.t-m.b)*(1-v/yMax);
+  let s = `<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="Gasto acumulado por ano">`;
+  for(let v=0; v<=yMax+1e-6; v+=step){
+    s += `<line x1="${m.l}" x2="${W-m.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/>`;
+    s += `<text x="${m.l-8}" y="${y(v)+4}" text-anchor="end">${num.format(v/1000)}k €</text>`;
+  }
+  const every = W<520?2:1;
+  for(let i=0;i<=N;i++) if(i%every===0||i===N) s += `<text x="${x(i)}" y="${H-m.b+18}" text-anchor="middle">${i===0?"Hoje":(W<520?i:"Ano "+i)}</text>`;
+  const pa = a.map((v,i)=>`${x(i)},${y(v)}`), pb = b.map((v,i)=>`${x(i)},${y(v)}`);
+  s += `<polygon points="${pa.join(" ")} ${pb.slice().reverse().join(" ")}" fill="var(--good-soft)"/>`;
+  s += `<polyline points="${pa.join(" ")}" fill="none" stroke="var(--ice)" stroke-width="3" stroke-linejoin="round"/>`;
+  s += `<polyline points="${pb.join(" ")}" fill="none" stroke="var(--ev)" stroke-width="3" stroke-linejoin="round"/>`;
+  s += `<circle cx="${x(N)}" cy="${y(a[N])}" r="4.5" fill="var(--ice)"/><circle cx="${x(N)}" cy="${y(b[N])}" r="4.5" fill="var(--ev)"/>`;
+  if(W>=520){
+    let ya = y(a[N]), yb = y(b[N]);
+    if(Math.abs(ya-yb)<16){ if(ya<yb){ya-=8;yb+=8;} else {ya+=8;yb-=8;} }
+    s += `<text x="${x(N)+10}" y="${ya+4}" style="fill:var(--ice)">${eur.format(a[N])}</text>`;
+    s += `<text x="${x(N)+10}" y="${yb+4}" style="fill:var(--ev)">${eur.format(b[N])}</text>`;
+  }
+  if(loanYears>0 && loanYears<N){
+    const xl = x(loanYears);
+    s += `<line x1="${xl}" x2="${xl}" y1="${m.t}" y2="${H-m.b}" stroke="var(--brand)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+    s += `<text x="${xl+6}" y="${m.t+12}" style="fill:var(--brand);font-weight:800">Fim do crédito</text>`;
+  }
+  s += `<line id="guide" y1="${m.t}" y2="${H-m.b}" stroke="var(--muted)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  s += `<rect id="hit" x="${m.l}" y="${m.t}" width="${W-m.l-m.r}" height="${H-m.t-m.b}" fill="transparent"/></svg><div class="tip" id="tip" hidden></div>`;
+  box.innerHTML = s;
+  const hit=$("hit"), guide=$("guide"), tip=$("tip");
+  const showIndex = i => {
+    guide.setAttribute("x1",x(i)); guide.setAttribute("x2",x(i)); guide.setAttribute("visibility","visible");
+    tip.hidden = false;
+    tip.innerHTML = `<strong>${i===0?"Hoje (entrada)":"Fim do ano "+i}</strong>
+      <div class="r"><span class="ice">Combustão</span><span>${eur.format(a[i])}</span></div>
+      <div class="r"><span class="ev">Elétrico</span><span>${eur.format(b[i])}</span></div>
+      <div class="r"><span class="good">Diferença</span><span>${eur.format(a[i]-b[i])}</span></div>`;
+    let left = x(i)+12; if(left+tip.offsetWidth>W) left = x(i)-tip.offsetWidth-12;
+    tip.style.left = Math.max(0,left)+"px"; tip.style.top = (m.t+4)+"px";
+  };
+  const move = e => {
+    const px = e.clientX - box.getBoundingClientRect().left;
+    const i = Math.max(0, Math.min(N, Math.round((px-m.l)/(W-m.l-m.r)*N)));
+    showIndex(i);
+  };
+  hit.addEventListener("pointermove", move); hit.addEventListener("pointerdown", move);
+  hit.addEventListener("pointerleave", ()=>{ tip.hidden=true; guide.setAttribute("visibility","hidden"); });
+  box.tabIndex = 0;
+  box.setAttribute("role","img");
+  box.setAttribute("aria-label","Gráfico do gasto acumulado em 10 anos. Use as setas do teclado para percorrer os anos.");
+  box.onkeydown = e => {
+    if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key)) return;
+    e.preventDefault();
+    let i = box.dataset.kbIndex!==undefined ? Number(box.dataset.kbIndex) : N;
+    if(e.key==="ArrowLeft") i = Math.max(0, i-1);
+    if(e.key==="ArrowRight") i = Math.min(N, i+1);
+    if(e.key==="Home") i = 0;
+    if(e.key==="End") i = N;
+    box.dataset.kbIndex = i;
+    showIndex(i);
+  };
+  box.onblur = () => { tip.hidden=true; guide.setAttribute("visibility","hidden"); };
+  if(box.dataset.kbIndex!==undefined) showIndex(Math.min(N, Number(box.dataset.kbIndex)));
+}
+
+function render(){
+  const info = readEnergy(); lastInfo = info;
+  const raw = $("price").value, price = Math.max(0, parseFloat(raw)||0);
+  const entrada = +$("entrada").value, prazo = +$("prazo").value;
+  const fin = price - Math.round(price*entrada/100);
+  const msgs = [];
+  if(raw==="" || price<=0) msgs.push("Indique o valor do carro.");
+  else if(fin>0 && fin<5000) msgs.push("O Cetelem financia a partir de 5 000 €. Aumente o valor ou reduza a entrada.");
+  if(fin>75000) msgs.push("O Cetelem financia até 75 000 €. Reduza o valor ou aumente a entrada.");
+  $("warn").hidden = !msgs.length; $("warn").textContent = msgs.join(" ");
+  $("priceR").value = Math.min(100000, Math.max(5000, price||5000));
+
+  const R = sim(price, entrada, prazo), L = R.L, rt = RATES[prazo], mtic = L.P + L.cost;
+  $("rate").innerHTML = `<span class="chip">Mensalidade <b>${eur2.format(L.pmt)}</b></span>
+    <span class="chip">TAN <b>${n2.format(rt.tan)}%${rt.est?"*":""}</b></span>
+    <span class="chip">TAEG <b>${pct1.format(L.taeg)}</b></span>
+    <span class="chip">Financiado <b>${eur.format(L.P)}</b></span>
+    <span class="chip">MTIC <b>${eur2.format(mtic)}</b></span>
+    <span class="same">igual nos dois carros${rt.est?" · * taxa estimada para este prazo":""}</span>`;
+
+  const T = table(R, prazo, info);
+  loanYears = T.ly;
+  const diff = R.ice.t.total - R.ev.t.total;
+  const diffTxt = (diff<0?"−":"")+eur.format(Math.abs(diff));
+  $("vBig").textContent = diffTxt;
+  $("heroBig").textContent = diffTxt; $("fsVal").textContent = diffTxt;
+  $("heroSub").textContent = `para ${eur.format(price)}, ${entrada}% de entrada, ${prazo} meses`;
+  $("verdict").className = "verdict"+(diff<0?" bad":"");
+  const ab = v => eur.format(Math.abs(v))+(v>=0?" a menos":" a mais");
+  $("vText").textContent = `Durante o crédito (${prazo} meses), ${ab(T.d1)} por mês; depois, até aos 10 anos, ${ab(T.d2)} por mês. Total do elétrico: ${eur.format(R.ev.t.total)}; combustão: ${eur.format(R.ice.t.total)}.`;
+  $("mIce").innerHTML = mcard("ice", R, T, prazo);
+  $("mEv").innerHTML = mcard("ev", R, T, prazo);
+  $("carIce").innerHTML = card("ice", R);
+  $("carEv").innerHTML = card("ev", R);
+  $("tenMain").innerHTML = tenHTML(R);
+  chart(R); renderEnergy(R); renderCharge(info);
+}
+
+["price","entrada","prazo","kmR","consEvR","consIceR","fuelR","pHomeR","pPubR","pFastR","shareHomeR","shareFastR"].forEach(id=>$(id).addEventListener("input", render));
+["entrada","prazo"].forEach(id=>$(id).addEventListener("change", render));
+$("priceR").addEventListener("input", ()=>{ $("price").value = $("priceR").value; render(); });
+function setRoute(r, apply){
+  route = r;
+  document.querySelectorAll("#routeSeg button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.route===r)));
+  if(apply && ROUTES[r]){ $("consEvR").value = ROUTES[r].ev; $("consIceR").value = ROUTES[r].ice; }
+}
+document.querySelectorAll("#routeSeg button").forEach(b=>b.addEventListener("click", ()=>{ setRoute(b.dataset.route, true); render(); }));
+["consEvR","consIceR"].forEach(id=>$(id).addEventListener("input", ()=>{
+  const r = ROUTES[route];
+  if(r && (+$("consEvR").value!==r.ev || +$("consIceR").value!==r.ice)) setRoute("personalizado", false);
+}));
+["swCasa","swPub","swRap"].forEach(id=>$(id).addEventListener("change", e=>{
+  if(!$("swCasa").checked && !$("swPub").checked && !$("swRap").checked){ e.target.checked = true; $("swHint").hidden = false; }
+  else $("swHint").hidden = true;
+  render();
+}));
+$("simReset").addEventListener("click", ()=>{ $("price").value = SIM_DEF.price; $("entrada").value = SIM_DEF.entrada; $("prazo").value = SIM_DEF.prazo; render(); });
+$("resetBtn").addEventListener("click", ()=>{
+  $("kmR").value = DEF.km; $("fuelR").value = DEF.fuel; $("pHomeR").value = DEF.pHome; $("pPubR").value = DEF.pPub; $("pFastR").value = DEF.pFast;
+  $("swCasa").checked = DEF.casa; $("swPub").checked = DEF.pub; $("swRap").checked = DEF.rap;
+  $("shareHomeR").value = DEF.shareHome; $("shareFastR").value = DEF.shareFast; $("swHint").hidden = true;
+  setRoute(DEF.route, true); render();
+});
+function setChargeTab(k, focus){
+  chargeTab = k;
+  document.querySelectorAll('[data-act="ctab"]').forEach(b=>{ const on = b.dataset.k===k; b.setAttribute("aria-selected",String(on)); b.tabIndex = on?0:-1; });
+  document.querySelectorAll('#chargeMain [role="tabpanel"]').forEach(p=>{ p.hidden = p.id!=="panel-"+k; });
+  if(focus){ const t = $("tab-"+k); if(t) t.focus(); }
+}
+document.addEventListener("click", e=>{
+  const t = e.target.closest("[data-act]"); if(!t) return;
+  const act = t.dataset.act;
+  if(act==="costs"){ costsOpen = !costsOpen; $("costsRow").hidden = !costsOpen; $("costsBtn").setAttribute("aria-expanded", String(costsOpen)); }
+  else if(act==="ctab") setChargeTab(t.dataset.k, false);
+  else if(act==="use"){ $({home:"pHomeR",pub:"pPubR",fast:"pFastR"}[t.dataset.k]).value = t.dataset.v; render(); }
+  else if(act==="period"){
+    $("tbl").dataset.period = t.dataset.p;
+    document.querySelectorAll('[data-act="period"]').forEach(b=>b.setAttribute("aria-pressed", String(b===t)));
+  }
+});
+document.addEventListener("keydown", e=>{
+  const t = e.target.closest && e.target.closest('[data-act="ctab"]'); if(!t) return;
+  const order = ["home","pub","fast"]; let i = order.indexOf(t.dataset.k);
+  if(e.key==="ArrowRight") i = (i+1)%3; else if(e.key==="ArrowLeft") i = (i+2)%3; else if(e.key==="Home") i = 0; else if(e.key==="End") i = 2; else return;
+  e.preventDefault(); setChargeTab(order[i], true);
+});
+let rz; window.addEventListener("resize", ()=>{ clearTimeout(rz); rz=setTimeout(()=>last&&chart(last),120); });
+render();
+})();
+
+(function(){
+  const b=document.getElementById("menuBtn"), l=document.getElementById("menuList");
+  if(!b||!l) return;
+  const close=()=>{ l.hidden=true; b.setAttribute("aria-expanded","false"); };
+  b.addEventListener("click",e=>{ e.stopPropagation(); const open=l.hidden; l.hidden=!open; b.setAttribute("aria-expanded",String(open)); });
+  l.addEventListener("click",e=>{ if(e.target.closest("a")) close(); });
+  document.addEventListener("click",e=>{ if(!l.hidden && !e.target.closest(".kebab")) close(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !l.hidden){ close(); b.focus(); } });
+})();
+
+(function(){
+  document.documentElement.classList.add("js");
+  const els=document.querySelectorAll(".card, .section .head, .step, .verdict, .mcar, .assump, .wrap");
+  els.forEach(e=>e.classList.add("reveal"));
+  if("IntersectionObserver" in window){
+    const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } }),{rootMargin:"0px 0px -6% 0px",threshold:0.05});
+    els.forEach(e=>io.observe(e));
+  } else els.forEach(e=>e.classList.add("in"));
+  const f=document.getElementById("floatSave");
+  const upd=()=>{ if(f) f.hidden = window.scrollY < 700; };
+  window.addEventListener("scroll",upd,{passive:true}); upd();
+})();
+</script>
+
+</body></html>
